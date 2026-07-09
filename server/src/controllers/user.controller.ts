@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import type { Request, Response } from "express";
-import { userModel } from "../models/db.js";
+import { contentModel, userModel } from "../models/db.js";
 import { signupSchema } from "../validator/user.js";
 
 export const signup = async (req: Request, res: Response) => {
@@ -43,19 +43,19 @@ export const login = async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
     const existingUser = await userModel.findOne({
-      username
+      username,
     });
-    if(!existingUser){
+    if (!existingUser) {
       return res.status(411).json({
-        msg: "User not found"
-      })
+        msg: "User not found",
+      });
     }
 
-    const matched = await bcrypt.compare(password, existingUser.password!)
-    if(!matched){
+    const matched = await bcrypt.compare(password, existingUser.password!);
+    if (!matched) {
       return res.status(411).json({
-        msg: "Incorrect Password"
-      })
+        msg: "Incorrect Password",
+      });
     }
 
     if (existingUser) {
@@ -74,9 +74,11 @@ export const login = async (req: Request, res: Response) => {
       });
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({
-      msg: "Internal Server Error"
-    })
+      msg: "Internal Server Error",
+    });
   }
 };
+
+

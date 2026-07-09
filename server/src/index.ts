@@ -6,6 +6,7 @@ import { authMiddleware } from "./middlewares/authMiddleware.js";
 import bcrypt from "bcryptjs";
 import userRouter from "./routes/user.routes.js";
 import { contentModel, userModel } from "./models/db.js";
+import contentRouter from "./routes/content.routes.js";
 
 const app = express();
 dotenv.config();
@@ -13,21 +14,10 @@ dotenv.config();
 app.use(express.json());
 
 app.use("/api/v1/user", userRouter) 
+app.use("/api/v1/user/content", contentRouter) 
 
 
-app.post("/api/v1/content", authMiddleware, async (req, res) => {
-  const { title, link, tags } = req.body;
-  await contentModel.create({
-    link,
-    title,
-    tags: [],
-    //@ts-ignore
-    userId: req.userId,
-  });
-  return res.json({
-    msg: "Content Added",
-  });
-});
+
 
 app.get("/api/v1/content", async (req, res) => {
   //@ts-ignore
