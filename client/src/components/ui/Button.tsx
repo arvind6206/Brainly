@@ -25,7 +25,8 @@ export const Button = (props: ButtonProps) => {
   return (
     <button
       className={`${variantStyles[props.variant]} 
-      ${defaultStyles} ${sizeStyles[props.size]}`}
+      ${defaultStyles} ${sizeStyles[props.size]}
+      flex items-center`}
     >
       {props.startIcon ? <div className='pr-2'>{props.startIcon}</div> : null }
       {props.text}
