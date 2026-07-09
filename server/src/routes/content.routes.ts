@@ -1,10 +1,14 @@
 import {Router} from 'express'
 import { authMiddleware } from '../middlewares/authMiddleware.js'
-import { createContent } from '../controllers/content.controller.js'
+import { createContent, getContent, deleteContent } from '../controllers/content.controller.js'
 
 const contentRouter = Router()
 
-contentRouter.post('/create', authMiddleware, createContent)
+contentRouter.post('/content', authMiddleware, createContent)
+contentRouter.get('/content', authMiddleware, getContent)
+contentRouter.delete('/content', authMiddleware, deleteContent)
+
+
 
 
 
