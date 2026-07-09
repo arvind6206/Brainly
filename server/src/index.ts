@@ -22,12 +22,28 @@ app.post('/api/v1/signup', async(req, res) => {
 
 })
 
-app.post('/api/v1/signin', (req, res) => {
+app.post('/api/v1/signin', async(req, res) => {
     const {username, password} = req.body
+
+    const existingUser = await  userModel.findOne({
+        username, password
+    })
+
+    if(existingUser){
+        const token = jwt.sign({
+            id: existingUser._id
+        }, process.env.JWT_SECRET!)
+        res.json({
+            token: token
+        })
+    } else {
+        res.status(411).json({
+            msg: "Incorrect credentials"
+        })
+    }
 })
 
 app.post('/api/v1/content', (req, res) => {
-    
 })
 
 app.get('/api/v1/content', (req, res) => {
@@ -51,3 +67,4 @@ if (!process.env.MONGO_URI) {
 }
 
 await mongoose.connect(process.env.MONGO_URI);
+app.listen(3000)
