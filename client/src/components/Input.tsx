@@ -1,10 +1,9 @@
-export function Input({onChange, placeholder}: {placeholder: string; 
-    onChange: () => void}){
+export function Input({placeholder, ref}: {placeholder: string; ref: any}){
     return (
         <div>
-            <input placeholder={placeholder} type={"text"} 
+            <input ref={ref} placeholder={placeholder} type={"text"} 
             className='px-4 py-2 border rounded m-2' 
-            onChange={onChange}></input>
+            ></input>
         </div>
     )
 }
