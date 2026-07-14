@@ -5,9 +5,11 @@ import { CreateContentModal } from "../components/CeateContentModal";
 import { PlusIcon } from "../icons/PlusIcon";
 import { ShareIcon } from "../icons/ShareIcon";
 import { Seidebar } from "../components/Sidebar";
+import { useContent } from "../hooks/useContent";
 
 function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
+  const contents = useContent()
 
   return (
     <div>
@@ -34,23 +36,16 @@ function Dashboard() {
           />
         </div>
 
-        <div className="flex gap-4">
-          <Card
-            type="twitter"
-            link="https://x.com/kirat_tw/status/2072804255224979770"
-            title="first tweet"
-          />
-          <Card
-            type="youtube"
-            link="https://www.youtube.com/watch?v=MIlDK1qQLaI"
-            title="harkirat yt"
-          />
-          <Card
-            type="youtube"
-            link="https://www.youtube.com/watch?v=Gdqkp-2V8KY"
-            title="PiyushGarg yt"
-          />
-        </div>
+        <div className="flex gap-4 flex-wrap">
+  {contents.map(({ type, link, title }) => (
+    <Card
+      key={link} 
+      type={type}
+      link={link}
+      title={title}
+    />
+  ))}
+</div>
       </div>
     </div>
   );

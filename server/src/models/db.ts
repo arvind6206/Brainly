@@ -13,7 +13,8 @@ const contentSchema = new Schema({
     title: String,
     link: String,
     tags: [{type: mongoose.Types.ObjectId, ref: "Tag"}],
-    uerId: {
+    type: String,
+    userId: {
         type: mongoose.Types.ObjectId,
         ref: "User",
         required: true

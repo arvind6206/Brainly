@@ -64,11 +64,11 @@ app.get("/api/v1/brain/:shareLink", async (req, res) => {
   }
 
   const content = await contentModel.find({
-    userId: link.userId,
+    userId: link.userId!,
   });
 
   const user = await userModel.findOne({
-    _Id: link.userId,
+    _id: link.userId,
   });
 
   if (!user) {

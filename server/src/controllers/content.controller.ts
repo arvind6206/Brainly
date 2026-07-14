@@ -3,10 +3,11 @@ import { contentModel } from "../models/db.js";
 
 export const createContent = async (req: Request, res: Response) => {
   try {
-    const { title, link, tags } = req.body;
+    const { title, link, tags, type } = req.body;
     await contentModel.create({
       link,
       title,
+      type,
       tags: [],
       //@ts-ignore
       userId: req.userId,
