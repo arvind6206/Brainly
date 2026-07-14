@@ -6,10 +6,11 @@ import contentRouter from "./routes/content.routes.js";
 import { authMiddleware } from "./middlewares/authMiddleware.js";
 import { contentModel, linkModel, userModel } from "./models/db.js";
 import { random } from "./utils.js";
+import cors from 'cors'
 
 const app = express();
 dotenv.config();
-
+app.use(cors())
 app.use(express.json());
 
 const PORT = process.env.PORT!;
